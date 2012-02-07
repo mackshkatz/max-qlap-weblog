@@ -1,4 +1,7 @@
 MaxQlapWeblog::Application.routes.draw do
+
+  resources :sessions
+  get '/login' => "sessions#new"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

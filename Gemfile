@@ -8,6 +8,7 @@ gem 'rails', '3.1.3'
 gem 'sqlite3'
 
 gem 'json'
+gem 'bcrypt-ruby'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -31,3 +32,12 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'ruby-debug'
 
+group :development, :test do
+  gem 'turn', :require => false
+  gem 'rspec'
+  gem 'rspec-rails'
+  gem 'shoulda'
+  gem 'database_cleaner'
+  # gem 'ruby-debug19'
+  gem 'capybara'
+end
