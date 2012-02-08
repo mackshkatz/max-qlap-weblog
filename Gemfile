@@ -5,8 +5,6 @@ gem 'rails', '3.1.3'
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
-
 gem 'json'
 gem 'bcrypt-ruby'
 
@@ -40,4 +38,9 @@ group :development, :test do
   gem 'database_cleaner'
   # gem 'ruby-debug19'
   gem 'capybara'
+  gem 'sqlite3'
+end
+
+group :production do
+  gem 'pg'
 end
