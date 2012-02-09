@@ -31,12 +31,10 @@ gem 'jquery-rails'
 # gem 'ruby-debug'
 
 group :development, :test do
-  gem 'turn', :require => false
   gem 'rspec'
   gem 'rspec-rails'
   gem 'shoulda'
   gem 'database_cleaner'
-  # gem 'ruby-debug19'
   gem 'capybara'
   gem 'sqlite3'
 end
