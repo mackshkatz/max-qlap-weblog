@@ -1,8 +1,8 @@
 class SessionsController < ApplicationController
-	skip_before_filter :require_login, :only => [:new, :create]
+	skip_before_filter :require_login, :only => [:index, :new, :create]
 
 	def index
-
+		@posts = Post.all
 	end
 
 	def create
