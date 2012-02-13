@@ -3,10 +3,7 @@ require 'spec_helper'
 describe "Blog homepage is displaying post titles" do
 	before do
 		@user = User.create(:first_name => "Groundskeeper", :last_name => "Willie", :email => "willie@springfield.edu", :password => "hello", :password_confirmation => "hello")
-		visit login_path
-		fill_in "email", :with => "willie@springfield.edu"
-		fill_in "password", :with => "hello"
-		click_button "Log in"
+		login(@user, "hello")
 		visit new_post_path
 		fill_in "post_title", :with => "test title"
 		fill_in "post_body", :with => "test body"
