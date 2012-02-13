@@ -17,4 +17,12 @@ describe "Blog homepage is displaying post titles" do
 		visit posts_path
 		page.should have_content "test title"
 	end
+
+	it "should allow user to edit an existing blog post" do
+		click_link "test title"
+		click_link "Edit Post"
+		fill_in "post_title", :with => "updated title"
+		click_button "Update"
+		page.should have_content "updated title"
+	end
 end
