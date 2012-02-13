@@ -8,8 +8,8 @@ describe "Blog homepage is displaying post titles" do
 		fill_in "password", :with => "hello"
 		click_button "Log in"
 		visit new_post_path
-		fill_in "title", :with => "test title"
-		fill_in "body", :with => "test body"
+		fill_in "post_title", :with => "test title"
+		fill_in "post_body", :with => "test body"
 		click_button "Create"
 	end
 
