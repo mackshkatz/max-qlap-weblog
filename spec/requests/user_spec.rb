@@ -15,7 +15,7 @@ describe "A user can log in", :type => :request do
 	end
 end
 
-describe "A guest can't see a certain link" do
+describe "A guest can't see the create-a-post link" do
 	before do
 		@user = User.create(:first_name => "Groundskeeper", :last_name => "Willie", :email => "willie@springfield.edu", :password => "hello", :password_confirmation => "hello")
 	end
