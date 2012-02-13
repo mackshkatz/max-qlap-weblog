@@ -11,6 +11,7 @@ describe "Blog homepage is displaying post titles" do
 		fill_in "post_title", :with => "test title"
 		fill_in "post_body", :with => "test body"
 		click_button "Create"
+		click_link "test title"
 	end
 
 	it "should show what the user just entered" do
@@ -19,10 +20,16 @@ describe "Blog homepage is displaying post titles" do
 	end
 
 	it "should allow user to edit an existing blog post" do
-		click_link "test title"
 		click_link "Edit Post"
 		fill_in "post_title", :with => "updated title"
 		click_button "Update"
 		page.should have_content "updated title"
+	end
+
+	it "should render errors on the page if a user tries to create/update an invalid post" do
+		click_link "Edit Post"
+		fill_in "post_title", :with => ""
+		click_button "Update"
+		page.should have_content "Title can't be blank"
 	end
 end
