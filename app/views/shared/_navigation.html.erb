@@ -1,9 +1,9 @@
 <nav>
 	<ul>
-		<li><%= link_to "Home", sessions_path %></li>
+		<li><%= link_to "Home", session_path %></li>
 		<% if current_user %>
 			<li><%= link_to "Create-a-post", new_post_path %></li>
-			<li><%= link_to "Log out", logout_path %></li>
+			<li><%= link_to "Log out", session_path, :method => :delete %></li>
 		<% else %>
 			<li><%= link_to "Log in", login_path %></li>	
 		<% end %>

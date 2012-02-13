@@ -1,8 +1,7 @@
 MaxQlapWeblog::Application.routes.draw do
   root :to => 'posts#index'
-  resources :sessions
+  resource :session
   get '/login' => "sessions#new"
-  match '/logout' => "sessions#destroy", :as => "logout"
 
   resources :posts
   # The priority is based upon order of creation:
