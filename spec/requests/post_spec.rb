@@ -33,7 +33,6 @@ describe "Blog homepage is displaying post titles" do
 	end
 
 	it "Blog homepage shows the teaser for each post" do
-		print page.html
 		page.should have_content "this is the portion of my post I want anyone to be able to see"
 	end
 end

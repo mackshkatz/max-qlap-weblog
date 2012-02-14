@@ -1,5 +1,6 @@
 <%= form_for @post, :url => { :action => "update" } do |f| %>
   <%= f.text_field :title %>
+  <%= f.text_area :teaser %>
   <%= f.text_area :body %>
   <%= f.submit "Update" %>
   <% if @post.errors.any? %>
