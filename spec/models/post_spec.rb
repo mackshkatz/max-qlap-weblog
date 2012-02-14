@@ -13,7 +13,7 @@ describe Post do
 
 	context "valid post" do
 		before do
-			@post = Post.new(:title => "title test", :body => "body test")
+			@post = Post.new(:title => "title test", :teaser => "teaser test", :body => "body test")
 		end
 
 		it "should require valid title and body" do
