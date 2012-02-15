@@ -8,6 +8,7 @@ gem 'rails', '3.1.3'
 gem 'json'
 gem 'bcrypt-ruby'
 gem 'launchy'
+gem 'friendly_id'
 
 # Gems used only for assets and not required
 # in production environments by default.

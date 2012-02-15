@@ -1,6 +1,6 @@
 <li>
 	<hgroup>
-		<h1><%= link_to post.title, post_path(post.id) %></h1>
+		<h1><%= link_to post.title, post_path(post.slug) %></h1>
 		<h2><%= post.teaser %></h2>
 		<%= link_to "Read more", post_path(post.id) %>
 	</hgroup>
