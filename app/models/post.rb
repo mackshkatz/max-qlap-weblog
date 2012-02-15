@@ -7,6 +7,8 @@ class Post < ActiveRecord::Base
 	# 	"#{id} #{title}".parameterize
 	# end
 
+	#passing the friendly_id method the title attribute to use that for the url
 	extend FriendlyId
 	friendly_id :title, :use => :slugged
+
 end
