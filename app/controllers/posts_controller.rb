@@ -2,9 +2,12 @@ class PostsController < ApplicationController
 	before_filter :require_login, :except => [:index]
 
 	def index
-		@posts = Post.paginate(:page => params[:page], :per_page => 5, :order => 'created_at DESC')
-
-		#Post.all#(:order => 'created_at ASC')
+		if params[:user_id]
+			@posts = Post.where(:user_id => params[:user_id]).paginate(:page => params[:page])
+		else	
+			@posts = Post.paginate(:page => params[:page], :per_page => 5, :order => 'created_at DESC')
+			#Post.all#(:order => 'created_at ASC')
+		end
 	end
 
 	def create

@@ -1,11 +1,12 @@
 MaxQlapWeblog::Application.routes.draw do
   root :to => 'posts#index'
   resource :session
-  get '/login' => "sessions#new"
+  get '/login' => 'sessions#new'
 
   resources :posts
+  get '/posts/author/:user_id' => 'posts#index', :as => 'author'
 
-  get '/about' => "pages#about"
+  get '/about' => 'pages#about'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

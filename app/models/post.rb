@@ -1,6 +1,8 @@
 class Post < ActiveRecord::Base
 	validates :title, :teaser, :body, :presence => true
 
+	belongs_to :user
+
 	# # internal method rails uses to convert an object
 	# # to a url parameter
 	# def to_param
