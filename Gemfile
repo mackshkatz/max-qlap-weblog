@@ -40,6 +40,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'capybara'
   gem 'sqlite3'
+  # gem 'ruby-debug19'
 end
 
 group :production do
