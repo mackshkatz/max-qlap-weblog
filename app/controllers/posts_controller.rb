@@ -6,7 +6,7 @@ class PostsController < ApplicationController
 			@posts = Post.where(:user_id => params[:user_id]).paginate(:page => params[:page])
 		else	
 			@posts = Post.paginate(:page => params[:page], :per_page => 5, :order => 'created_at DESC')
-			# Post.all#(:order => 'created_at ASC')
+			# Post.all # (:order => 'created_at ASC')
 		end
 	end
 
@@ -15,7 +15,7 @@ class PostsController < ApplicationController
 
 		# you could use this if you wanted to add a hidden field in the create
 		# form that posted the user_id writing the post, but bad practice
-		# @post = Post.new(params[:post]) params[:post][:user_id]
+		# @post = Post.new(params[:post]), if the form is submitting this => params[:post][:user_id]
 
 		# old code
 		# @post = Post.new(params[:post])
