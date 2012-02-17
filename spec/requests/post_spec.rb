@@ -37,7 +37,19 @@ describe "Blog homepage is displaying post titles" do
 	end
 
 	it "Blog homepage only shows last 5 posts" do
-		page.should_not have_content "fifth post"	
+		10.times do	|x|
+			visit new_post_path
+			fill_in "post_title", :with => "#{x} test title"
+			fill_in "post_teaser", :with => "#{x} this is the portion of my post I want anyone to be able to see"
+			fill_in "post_body", :with => "#{x} test body"
+			click_button "Create"
+		end
+		page.should_not have_content "4 test title"
+	end
+
+	it "Slug should be the same as post title, instead of post id" do
+		click_link "test title"
+		current_path.should == "/posts/test-title"
 	end
 end
 
