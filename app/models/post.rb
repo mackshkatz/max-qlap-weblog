@@ -12,5 +12,4 @@ class Post < ActiveRecord::Base
 	#passing the friendly_id method the title attribute to use that for the url
 	extend FriendlyId
 	friendly_id :title, :use => :slugged
-
 end
