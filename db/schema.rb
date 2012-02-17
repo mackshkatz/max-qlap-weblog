@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120216184118) do
+ActiveRecord::Schema.define(:version => 20120217212430) do
 
   create_table "posts", :force => true do |t|
     t.datetime "created_at"
@@ -31,6 +31,9 @@ ActiveRecord::Schema.define(:version => 20120216184118) do
     t.datetime "updated_at"
     t.string   "password_digest"
     t.string   "email"
+    t.string   "slug"
   end
+
+  add_index "users", ["slug"], :name => "index_users_on_slug", :unique => true
 
 end
