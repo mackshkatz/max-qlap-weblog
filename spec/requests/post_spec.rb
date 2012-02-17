@@ -35,6 +35,10 @@ describe "Blog homepage is displaying post titles" do
 	it "Blog homepage shows the teaser for each post" do
 		page.should have_content "this is the portion of my post I want anyone to be able to see"
 	end
+
+	it "Blog homepage only shows last 5 posts" do
+		page.should_not have_content "fifth post"	
+	end
 end
 
 
