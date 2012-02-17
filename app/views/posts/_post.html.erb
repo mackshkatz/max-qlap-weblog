@@ -1,7 +1,8 @@
 <li>
 	<hgroup>
 		<h1><%= link_to post.title, post_path(post.slug) %></h1>
-		<h2><%= post.teaser %></h2>
+		<h2><%= link_to post.user_id, author_path(post.user_id) %></h2>
+		<p><%= post.teaser %></p>
 		<%= link_to "Read more", post_path(post.id) %>
 	</hgroup>
 </li>
