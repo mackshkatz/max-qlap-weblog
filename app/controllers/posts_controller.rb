@@ -12,13 +12,13 @@ class PostsController < ApplicationController
 
 	def create
 		@post = current_user.posts.new(params[:post])
+		
+		tag_names = params[:tags].split
+		tag_names.each do |tag_name|
+			tag = Tag.find_or_create_by_name(tag_name)
+			@post.tags << tag
+		end
 
-		# you could use this if you wanted to add a hidden field in the create
-		# form that posted the user_id writing the post, but bad practice
-		# @post = Post.new(params[:post]), if the form is submitting this => params[:post][:user_id]
-
-		# old code
-		# @post = Post.new(params[:post])
 		if @post.save
 			redirect_to posts_path
 		else

@@ -1,6 +1,11 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  before_filter :sanitize_params
 
+  def sanitize_params
+    params = HashWithIndifferentAccess.new(params)
+  end
+  
   def require_login
     unless logged_in?
       flash[:error] = "You must be logged in to access this section"
