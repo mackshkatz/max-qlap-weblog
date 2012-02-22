@@ -6,6 +6,8 @@ MaxQlapWeblog::Application.routes.draw do
   resources :posts
   get '/posts/author/:user_id' => 'posts#index', :as => :author
 
+  get '/posts/tag/:tag_id' => 'posts#index', :as => :tag
+
   get '/about' => 'pages#about'
   # The priority is based upon order of creation:
   # first created -> highest priority.
