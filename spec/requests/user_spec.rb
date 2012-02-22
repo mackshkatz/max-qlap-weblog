@@ -30,15 +30,13 @@ describe "A user can log in", :type => :request do
 	end
 end
 
-describe "A guest can't see the create-a-post link" do
+describe "A guest user" do
 	before do
 		@user = User.create(:first_name => "Groundskeeper", :last_name => "Willie", :email => "willie@springfield.edu", :password => "hello", :password_confirmation => "hello")
 	end
-
-	context "A guest user" do
-		it "should not have the create-a-post page if not logged in" do
-			visit root_path
-			page.should_not have_content "Create-a-post"
-		end
+	
+	it "should not have the create-a-post page if not logged in" do
+		visit root_path
+		page.should_not have_content "Create-a-post"
 	end
 end
