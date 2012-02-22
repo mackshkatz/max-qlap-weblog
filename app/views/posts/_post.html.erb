@@ -4,8 +4,6 @@
 		<h2><%= link_to post.user.first_name, author_path(post.user_id) %></h2>
 		<p><%= post.teaser %></p>
 		<%= link_to "Read more", post_path(post) %>
-		<% post.tags.each do |tag| %>
-			<%= tag.name %>
-		<% end %>
+		<%= render :partial => "tag", :collection => post.tags %>
 	</hgroup>
 </li>
