@@ -3,6 +3,7 @@ class Post < ActiveRecord::Base
 
 	belongs_to :user
 	has_and_belongs_to_many :tags
+	has_many :comments
 
 	#passing the friendly_id method the title attribute to use that for the url
 	extend FriendlyId

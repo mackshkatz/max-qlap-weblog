@@ -18,7 +18,7 @@ describe "Guests can view posts for a given tag" do
 
 	it "should filter all posts for a given tag" do
 		click_link "test-tag"
-		current_path.should == "/posts/tags/test-tag"
+		current_path.should == "/posts/tag/test-tag"
 		page.should have_content "test title"
 	end
 end

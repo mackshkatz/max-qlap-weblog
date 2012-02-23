@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 
 	def index
 		if params[:user_id]
-			@posts = Post.where(:user_id => params[:user_id]).paginate(:page => params[:page])
+			@posts = User.find(params[:user_id]).posts.paginate(:page => params[:page])
 		elsif params[:tag_id]
 			@posts = Tag.find(params[:tag_id]).posts.paginate(:page => params[:page])
 		else	
@@ -24,7 +24,7 @@ class PostsController < ApplicationController
 		if @post.save
 			redirect_to posts_path
 		else
-			render new_post_path
+			render :new
 		end
 	end
 

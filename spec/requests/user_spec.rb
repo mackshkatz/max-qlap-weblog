@@ -25,7 +25,7 @@ describe "A user can log in", :type => :request do
 		fill_in "post_body", :with => "test body"
 		click_button "Create"
 		click_link "Groundskeeper"
-		current_path.should == "/posts/author/Groundskeeper"
+		current_path.should == "/posts/author/groundskeeper"
 		page.should have_content "Groundskeeper"
 	end
 end
