@@ -5,11 +5,13 @@
 <h2> Submit a comment </h2>
 <%= form_for [@post, @post.comments.build] do |f| %>
 	<%= f.text_area :body %>
-	<%= f.text_field :email %>
+	<%= f.email_field :email %>
 	<%= f.submit "Create" %>
 <% end %>
 
 <% @post.comments.each do |comment| %>
-	<p><%= comment.body %>
-	<%= comment.email %></p>
+	<p>
+		<%= comment.body %>
+		<%= comment.email %>
+	</p>
 <% end %>

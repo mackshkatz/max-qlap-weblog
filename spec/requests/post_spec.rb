@@ -51,6 +51,14 @@ describe "Blog homepage is displaying post titles" do
 		click_link "test title"
 		current_path.should == "/posts/test-title"
 	end
+
+	it "Should allow anyone to comment on a post" do
+		click_link "test title"
+		fill_in "comment_body", :with => "comment body"
+		fill_in "comment_email", :with => "max@test.com"
+		click_button "Create"
+		page.should have_content "comment body"
+	end
 end
 
 
