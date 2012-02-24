@@ -1,3 +1,5 @@
+<%= render 'shared/errors' %>
+
 <%= form_for @post, :url => { :action => "create" } do |f| %>
   <%= f.text_field :title, :placeholder => "Title" %>
   <%= f.text_area :teaser %>
