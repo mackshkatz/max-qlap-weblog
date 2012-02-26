@@ -3,7 +3,7 @@
 		<h1><%= link_to post.title, post_path(post) %></h1>
 		<h2><%= link_to post.user.first_name, author_path(post.user.slug) %></h2>
 		<p><%= post.teaser %></p>
-		<%= image_tag post.image_url.to_s %>
+		<%= image_tag post.image_url(:thumb).to_s %>
 		<%= link_to "Read more", post_path(post) %>
 		<p><%= render :partial => "tag", :collection => post.tags %></p>
 	</hgroup>
