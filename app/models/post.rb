@@ -8,4 +8,8 @@ class Post < ActiveRecord::Base
 	#passing the friendly_id method the title attribute to use that for the url
 	extend FriendlyId
 	friendly_id :title, :use => :slugged
+
+
+	# specify string in posts form for tag 'post[tags]'
+	# in this model use before filter to do logic that is currently in create action of posts controller
 end

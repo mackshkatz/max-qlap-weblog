@@ -15,7 +15,7 @@ test_tag2 = Tag.create(:name => "test2")
 
 post1 = Post.create(:user => max, :title => "first post", :teaser => "read the first one", :body => "We number one yeaaa")
 post2 = Post.create(:user => max, :title => "second post", :teaser => "lurk inside", :body => "We number two yeaaa")
-post2.tags << test_tag << test_tag2
+post2.tags << [test_tag, test_tag2]
 post3 = Post.create(:user => max, :title => "third post", :teaser => "attention getter", :body => "We number three yeaaa")
 post3.tags << test_tag
 post4 = Post.create(:user => max, :title => "fourth post", :teaser => "gadgdf", :body => "We number four yeaaa")

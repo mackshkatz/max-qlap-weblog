@@ -2,6 +2,8 @@
 <p><%= @post.body %></p>
 <%= link_to "Edit Post", edit_post_path(@post) %>
 
+<%= render 'shared/errors' %>
+
 <h2> Submit a comment </h2>
 <%= form_for [@post, @post.comments.build] do |f| %>
 	<%= f.text_area :body %>
