@@ -1,9 +1,10 @@
 <%= render 'shared/errors' %>
 
-<%= form_for @post, :url => { :action => "create" } do |f| %>
+<%= form_for @post, :url => { :action => "create" }, :html => {:multipart => true} do |f| %>
   <%= f.text_field :title, :placeholder => "Title" %>
   <%= f.text_area :teaser %>
   <%= f.text_area :body %>
+  <%= f.file_field :image %>
   <%= text_field_tag :tags, nil, :placeholder => "tags"  %>
   <%= f.submit "Create" %>
 <% end %>
