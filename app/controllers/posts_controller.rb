@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-	before_filter :require_login, :except => [:index]
+	before_filter :require_login, :except => [:index, :show]
 
 	def index
 		if params[:user_id]
