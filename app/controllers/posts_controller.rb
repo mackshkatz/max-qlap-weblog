@@ -1,5 +1,8 @@
 class PostsController < ApplicationController
 	before_filter :require_login, :except => [:index, :show]
+	
+	caches_page :index, :show
+	cache_sweeper :post_sweeper
 
 	def index
 		if params[:user_id]
@@ -10,6 +13,10 @@ class PostsController < ApplicationController
 			@posts = Post.paginate(:page => params[:page], :per_page => 5, :order => 'created_at DESC')
 			# Post.all # (:order => 'created_at ASC')
 		end
+	end
+
+	def new
+		@post = Post.new
 	end
 
 	def create
@@ -26,10 +33,6 @@ class PostsController < ApplicationController
 		else
 			render :new
 		end
-	end
-
-	def new
-		@post = Post.new
 	end
 
 	def show

@@ -1,4 +1,5 @@
 MaxQlapWeblog::Application.routes.draw do
+  get 'posts/page/:page', :to => 'posts#index'
   root :to => 'posts#index'
   resource :session, :only => [:new, :create, :destroy]
   get '/login' => 'sessions#new'
