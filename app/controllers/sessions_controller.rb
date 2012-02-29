@@ -13,6 +13,8 @@ class SessionsController < ApplicationController
 	end
 
 	def destroy
+		expire_page '/'
+		FileUtils.rm_rf '#{page_cache_directory}/posts/page'
 		session[:user_id] = nil
 	  redirect_to root_path, :notice => "Logged out!"
 	end
