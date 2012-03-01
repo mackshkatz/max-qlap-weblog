@@ -6,7 +6,7 @@ class PostSweeper < ActionController::Caching::Sweeper
 		expire_page post_path(post.id)
 		expire_page '/'
 		FileUtils.rm_rf '#{page_cache_directory}/posts/page'
-		FileUtils.rm_rf '#{page_cache_directory}/author'
+		FileUtils.rm_rf '#{page_cache_directory}/posts/author'
 	end
 
 	alias_method :after_update, :sweep
