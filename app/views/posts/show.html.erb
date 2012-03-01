@@ -1,11 +1,18 @@
-<% cache 'post_content' do %>
+<%= render 'shared/errors' %>
+
+<% cache @post do %>
 	<h1><%= @post.title %></h1>
 	<%= image_tag @post.image_url(:thumb).to_s %>
 	<p><%= @post.body %></p>
 	<%= link_to "Edit Post", edit_post_path(@post) %>
-<% end %>
 
-<%= render 'shared/errors' %>
+	<% @post.comments.each do |comment| %>
+		<p>
+			<%= comment.body %>
+			<%= comment.email %>
+		</p>
+	<% end %>
+<% end %>
 
 <h2> Submit a comment </h2>
 <%= form_for [@post, @post.comments.build] do |f| %>
@@ -14,11 +21,3 @@
 	<%= f.submit "Create" %>
 <% end %>
 
-<% cache 'comment_section' do %>
-	<% @post.comments.each do |comment| %>
-		<p>
-			<%= comment.body %>
-			<%= comment.email %>
-		</p>
-	<% end %>
-<% end %>

@@ -1,7 +1,4 @@
 class CommentsController < ApplicationController
-
-	cache_sweeper :comment_sweeper
-
 	def create
 		@post = Post.find(params[:post_id])
 		@comment = @post.comments.new(params[:comment])

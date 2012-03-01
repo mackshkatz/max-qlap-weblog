@@ -3,7 +3,6 @@ class PostSweeper < ActionController::Caching::Sweeper
 
 	def sweep(post)
 		expire_page posts_path
-		expire_page post_path(post.id)
 		expire_page '/'
 		FileUtils.rm_rf '#{page_cache_directory}/posts/page'
 		FileUtils.rm_rf '#{page_cache_directory}/posts/author'
