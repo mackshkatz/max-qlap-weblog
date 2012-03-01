@@ -1,7 +1,9 @@
-<h1><%= @post.title %></h1>
-<%= image_tag @post.image_url(:thumb).to_s %>
-<p><%= @post.body %></p>
-<%= link_to "Edit Post", edit_post_path(@post) %>
+<% cache 'post_content' do %>
+	<h1><%= @post.title %></h1>
+	<%= image_tag @post.image_url(:thumb).to_s %>
+	<p><%= @post.body %></p>
+	<%= link_to "Edit Post", edit_post_path(@post) %>
+<% end %>
 
 <%= render 'shared/errors' %>
 
@@ -12,9 +14,11 @@
 	<%= f.submit "Create" %>
 <% end %>
 
-<% @post.comments.each do |comment| %>
-	<p>
-		<%= comment.body %>
-		<%= comment.email %>
-	</p>
+<% cache 'comment_section' do %>
+	<% @post.comments.each do |comment| %>
+		<p>
+			<%= comment.body %>
+			<%= comment.email %>
+		</p>
+	<% end %>
 <% end %>

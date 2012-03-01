@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
 		@comment = @post.comments.new(params[:comment])
 
 		if @comment.save
-			expire_page post_path(@post)
+			expire_fragment 'comment_section'
 			redirect_to post_path(@post), :notice => "Your comment successfully saved"
 		else
 			render "posts/show"

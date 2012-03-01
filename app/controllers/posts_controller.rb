@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 	before_filter :require_login, :except => [:index, :show]
-	
-	caches_page :index, :show
+
+	caches_page :index
 	cache_sweeper :post_sweeper
 
 	def index
