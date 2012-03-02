@@ -4,8 +4,6 @@ class PostSweeper < ActionController::Caching::Sweeper
 	def sweep(post)
 		expire_page posts_path
 		expire_page '/'
-		FileUtils.rm_rf '#{page_cache_directory}/posts/page'
-		FileUtils.rm_rf '#{page_cache_directory}/posts/author'
 	end
 
 	alias_method :after_update, :sweep
