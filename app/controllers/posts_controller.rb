@@ -46,7 +46,7 @@ class PostsController < ApplicationController
 	def update
 		@post = Post.find(params[:id])
 		if @post.update_attributes(params[:post])
-			redirect_to post_path
+			redirect_to post_path(@post.id)
 		else
 			flash.now[:alert] = "Update didn't save"
 			render :edit
