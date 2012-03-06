@@ -21,12 +21,8 @@ class PostsController < ApplicationController
 
 	def create
 		@post = current_user.posts.new(params[:post])
-		
-		tag_names = params[:tags].split
-		tag_names.each do |tag_name|
-			tag = Tag.find_or_create_by_name(tag_name)
-			@post.tags << tag
-		end
+
+		@post.attach_tags_from_params(params)
 
 		if @post.save
 			redirect_to posts_path
