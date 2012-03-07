@@ -17,3 +17,5 @@
 # Ignore generated cached files
 /public/author/
 /public/page/
+/public/posts.html
+/public/index.html
