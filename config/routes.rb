@@ -7,6 +7,9 @@ MaxQlapWeblog::Application.routes.draw do
   resources :posts do
     resources :comments
   end
+
+  resources :comments
+  
   get '/posts/author/:user_id' => 'posts#index', :as => :author
   get '/posts/tag/:tag_id' => 'posts#index', :as => :tag
   get '/about' => 'pages#about'
