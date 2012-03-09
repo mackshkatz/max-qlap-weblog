@@ -13,7 +13,8 @@ gem 'will_paginate'
 gem 'acts-as-taggable-on', '~> 2.2.2'
 gem 'rmagick'
 gem 'carrierwave'
-#gem 'newrelic_rpm'
+# gem 'newrelic_rpm'
+# gem 'saikuro', '~> 1.1.0'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -44,7 +45,8 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'capybara'
   gem 'sqlite3'
-  #gem 'ruby-debug19'
+  # gem 'ruby-debug19'
+  gem 'simplecov', :require => false
 end
 
 group :production do

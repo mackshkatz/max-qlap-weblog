@@ -19,3 +19,6 @@
 /public/page/
 /public/posts.html
 /public/index.html
+
+# Ignore coverage results
+coverage
