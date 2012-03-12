@@ -13,6 +13,7 @@ gem 'will_paginate'
 gem 'acts-as-taggable-on', '~> 2.2.2'
 gem 'rmagick'
 gem 'carrierwave'
+gem 'fog'
 # gem 'newrelic_rpm'
 # gem 'saikuro', '~> 1.1.0'
 
