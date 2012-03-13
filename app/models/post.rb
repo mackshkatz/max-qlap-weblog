@@ -16,6 +16,6 @@ class Post < ActiveRecord::Base
 		tag_names.each do |tag_name|
 			tag = Tag.find_or_create_by_name(tag_name)
 			self.tags << tag
-		end		
+		end
 	end
 end
