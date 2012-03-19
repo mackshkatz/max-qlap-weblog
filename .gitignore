@@ -14,11 +14,15 @@
 /log/*.log
 /tmp
 
+# Ignore installed gems
+/vendor/bundle/
+
 # Ignore generated cached files
 /public/author/
 /public/page/
 /public/posts.html
 /public/index.html
+/public/uploads/
 
 # Ignore coverage results
 coverage
