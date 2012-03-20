@@ -1,8 +1,6 @@
 <ul>
 	<% @comments.each do |comment| %>
-		<% if comment.approved == false %>
-			<p><%= comment.body %>
-			<%= link_to "Approve?", comment_path(comment), :method => :put %></p>
-		<% end %>
+		<p><%= comment.body %>
+		<%= link_to "Approve?", comment_path(comment), :method => :put %></p>
 	<% end %>
 </ul>
