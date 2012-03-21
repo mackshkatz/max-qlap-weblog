@@ -3,10 +3,9 @@ require 'spec_helper'
 describe CommentsController do
 
 	before do
-		@comment1 = Comment.create(:body => 'one', :email => 'test@test.com' )
-		@comment2 = Comment.create(:body => 'two', :email => 'test@test.com' )
-		@comment3 = Comment.create(:body => 'three', :email => 'test@test.com' )
-		# @comments = [ @comment1, @comment2, @comment3 ]
+		@comment1 = Comment.create(:id => 1, :body => 'one', :email => 'test@test.com' )
+		@comment2 = Comment.create(:id => 2, :body => 'two', :email => 'test@test.com' )
+		@comment3 = Comment.create(:id => 3, :body => 'three', :email => 'test@test.com' )
 	end
 
 	describe "When getting the index" do
