@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
 	def index
-		@comments = Comment.where(:approved => false)
+		@comments = Comment.approved
 	end
 
 	def create
