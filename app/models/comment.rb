@@ -7,8 +7,9 @@ class Comment < ActiveRecord::Base
 		self.approved = false if self.approved.nil?
 	end
 
-	scope :approved, where(:approved => true)
-	# def approved_true
-	# 	where(:approved => true)
+	scope :approved, lambda { |value = true| where(:approved => value) }
+	# def self.approved ( value = true )
+	# 	self.where(:approved => value)
 	# end
+
 end

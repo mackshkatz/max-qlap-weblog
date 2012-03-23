@@ -9,6 +9,7 @@ MaxQlapWeblog::Application.routes.draw do
   end
 
   resources :comments
+  post  '/comments/approve_all' => 'comments#approve_all', :as => :approve_all_comments
 
   get '/posts/author/:user_id' => 'posts#index', :as => :author
   get '/posts/tag/:tag_id' => 'posts#index', :as => :tag

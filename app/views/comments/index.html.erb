@@ -1,6 +1,11 @@
-<ul>
-	<% @comments.each do |comment| %>
-		<p><%= comment.body %>
-		<%= link_to "Approve?", comment_path(comment), :method => :put %></p>
-	<% end %>
-</ul>
+<%= form_tag approve_all_comments_url	 do %>
+	<ul>
+		<% @comments.each do |comment| %>
+			<li>
+				<%= label_tag comment.body %>
+				<%= check_box_tag 'comment_ids[]', comment.id %>
+			</li>
+		<% end %>
+	</ul>
+	<%= submit_tag("Approve") %>
+<% end %>

@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
 	def index
-		@comments = Comment.approved
+		@comments = Comment.approved false
 	end
 
 	def create
@@ -18,6 +18,15 @@ class CommentsController < ApplicationController
 		@comment = Comment.find(params[:id])
 		@comment.approved = true
 		@comment.save
+		redirect_to comments_path
+	end
+
+	def approve_all
+		params[:comment_ids].each do |comment_id|
+			comment = Comment.find(comment_id)
+			comment.approved = true
+			comment.save
+		end
 		redirect_to comments_path
 	end
 end
