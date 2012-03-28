@@ -15,6 +15,11 @@ MaxQlapWeblog::Application.routes.draw do
   get '/posts/tag/:tag_id' => 'posts#index', :as => :tag
   get '/about' => 'pages#about'
 
+  namespace :api do
+    namespace :v1 do
+      resources :posts
+    end
+  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
