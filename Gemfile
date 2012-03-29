@@ -46,7 +46,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'capybara'
   gem 'sqlite3'
-  # gem 'ruby-debug19'
+  gem 'ruby-debug19'
   gem 'simplecov', :require => false
 end
 

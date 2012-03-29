@@ -17,7 +17,10 @@ MaxQlapWeblog::Application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :posts
+      resources :posts do
+        resources :comments
+      end
+      resources :comments
     end
   end
   # The priority is based upon order of creation:
