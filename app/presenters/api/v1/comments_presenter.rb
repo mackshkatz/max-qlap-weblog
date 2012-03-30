@@ -1,4 +1,4 @@
-class CommentsPresenter < Api::V1::BasePresenter
+class Api::V1::CommentsPresenter < Api::V1::BasePresenter
 	attr_accessor :comments
 
 	def initialize(comments)
@@ -15,9 +15,5 @@ class CommentsPresenter < Api::V1::BasePresenter
 			}
 		end
 		comments_array
-	end
-
-	def count
-		
 	end
 end

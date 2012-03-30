@@ -21,6 +21,7 @@ MaxQlapWeblog::Application.routes.draw do
         resources :comments
       end
       get '/comments/unapproved' => 'comments#unapproved'
+      get '/stats' => 'base#stats'
       resources :comments
     end
   end

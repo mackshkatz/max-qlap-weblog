@@ -1,4 +1,4 @@
-class PostsPresenter < Api::V1::BasePresenter
+class Api::V1::PostsPresenter < Api::V1::BasePresenter
 	attr_accessor :posts
 
 	def initialize(posts)
@@ -15,9 +15,5 @@ class PostsPresenter < Api::V1::BasePresenter
 			}
 		end
 		posts_array
-	end
-
-	def count
-		
 	end
 end
