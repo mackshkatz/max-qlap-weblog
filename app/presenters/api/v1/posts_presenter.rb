@@ -16,4 +16,8 @@ class PostsPresenter < Api::V1::BasePresenter
 		end
 		posts_array
 	end
+
+	def count
+		
+	end
 end
