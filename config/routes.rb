@@ -19,6 +19,10 @@ MaxQlapWeblog::Application.routes.draw do
     namespace :v1 do
       resources :posts do
         resources :comments
+        collection do
+          #resources :tags, :only => [:show]
+          get '/tags/:tag_id' => 'tags#show'
+        end
       end
       get '/comments/unapproved' => 'comments#unapproved'
       get '/stats' => 'base#stats'
