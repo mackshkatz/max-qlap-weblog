@@ -1,7 +1,7 @@
 <nav>
 	<ul>
 		<li><%= link_to "Home", root_path %></li>
-		<li><%= link_to "About", about_path %></li>
+		<li><%= link_to "About", static_path("about") %></li>
 		<% if current_user %>
 			<li><%= link_to "Comment Approval", comments_path %></li>
 			<li><%= link_to "Create-a-post", new_post_path %></li>

@@ -14,7 +14,7 @@ MaxQlapWeblog::Application.routes.draw do
   get '/posts/author/:user_id' => 'posts#index', :as => :author
   get '/posts/tag/:tag_id' => 'posts#index', :as => :tag
 
-  match '/pages/:id' => 'pages#show'
+  match '/pages/:id' => 'pages#show', :as => :static
 
   namespace :api do
     namespace :v1 do
