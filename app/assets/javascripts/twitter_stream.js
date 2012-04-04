@@ -17,14 +17,23 @@ var twitter_stream = {
 					console.log(data);
 					var new_tweet_text = data.results[0].text;
 					var new_tweet_user = data.results[0].from_user;
-					$('.tweet-stream').after('<div><p><span>' + new_tweet_user + ':</span>' + new_tweet_text + '</p></div>');
+					$('.tweet-stream ul').prepend('<li><span>' + new_tweet_user + ':</span>' + new_tweet_text + '</li>');
 				},
 				dataType: "jsonp",
 				complete: function() {
-					setTimeout(getTweets, 1000);
+					setTimeout( function() {
+						getTweets();
+						capTweets();
+					}, 1000);
 				}
 			});	
 		};
+		var capTweets = function() {
+			var stream_size = $('.tweet-stream ul').children();
+			if (stream_size.length > 20) {
+				$('.tweet-stream ul li:last-child').remove();
+			};
+		}
 		getTweets();
 	}
 }
