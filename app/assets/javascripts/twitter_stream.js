@@ -6,7 +6,8 @@ var twitter_stream = {
 		//hdhssjf.[var] = true
 	},
 	bindEvents: function() {
-		$('input[type="button"]').bind('click', this.startStream)
+		$('.inputs input[type="button"]').on('click', this.startStream)
+		$('.tweet-stream').on('click', '.favorite-button', this.saveTweet)
 	},
 	startStream: function(e) {
 		$('.tweet-stream ul').children().remove();
@@ -20,14 +21,14 @@ var twitter_stream = {
 				success: function(data) {
 					var new_tweet_text = data.results[0].text;
 					var new_tweet_user = data.results[0].from_user;
-					$('.tweet-stream ul').prepend('<li><span>' + new_tweet_user + ':</span>' + new_tweet_text + '</li>');
+					$('.tweet-stream ul').prepend('<li><span>' + new_tweet_user + ':</span>' + new_tweet_text + '<input type=button class="favorite-button" value="favorite?" /></li>');
 				},
 				dataType: "jsonp",
 				complete: function() {
-					setTimeout( function() {
+					setTimeout(function() {
 						getTweets();
 						capTweets();
-					}, 1000);
+					}, 5000);
 				}
 			});	
 		};
@@ -38,6 +39,10 @@ var twitter_stream = {
 			};
 		}
 		getTweets();
+	},
+	saveTweet: function() {
+		console.log($(this).parent());
+		$(this).parent().appendTo($('.favorites'));
 	}
 }
 
