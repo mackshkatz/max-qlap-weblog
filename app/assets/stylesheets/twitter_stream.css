@@ -1,0 +1,19 @@
+#container {
+	width: 1000px;
+	margin: 0 auto;
+}
+
+.tweet-stream {
+	float: left;
+	width: 600px;
+	margin-right: 50px;
+}
+
+.favorites {
+	float: left;
+	width: 350px;
+}
+
+.favorites h2 {
+	margin: 0;
+}
