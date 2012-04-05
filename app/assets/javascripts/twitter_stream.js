@@ -8,6 +8,7 @@ var twitter_stream = {
 	bindEvents: function() {
 		$('.inputs input[type="button"]').on('click', this.startStream)
 		$('.tweet-stream').on('click', '.favorite-button', this.saveTweet)
+		$('.tweet-stream').on('click', '.remove-button', this.removeTweet)
 	},
 	startStream: function(e) {
 		$('.tweet-stream ul').children().remove();
@@ -21,7 +22,7 @@ var twitter_stream = {
 				success: function(data) {
 					var new_tweet_text = data.results[0].text;
 					var new_tweet_user = data.results[0].from_user;
-					$('.tweet-stream ul').prepend('<li><span>' + new_tweet_user + ':</span>' + new_tweet_text + '<input type=button class="favorite-button" value="favorite?" /></li>');
+					$('.tweet-stream ul').prepend('<li><span>' + new_tweet_user + ':</span>' + new_tweet_text + '<input type=button class="favorite-button" value="favorite?" /><input type=button class="remove-button" value="remove" /></li>');
 				},
 				dataType: "jsonp",
 				complete: function() {
@@ -43,6 +44,9 @@ var twitter_stream = {
 	saveTweet: function() {
 		console.log($(this).parent());
 		$(this).parent().appendTo($('.favorites'));
+	},
+	removeTweet: function() {
+		$(this).parent().remove();
 	}
 }
 
