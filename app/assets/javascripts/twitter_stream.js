@@ -5,10 +5,11 @@ var twitter_stream = {
 	tweet_cache: {
 		//hdhssjf.[var] = true
 	},
+	next_retrieval_timeout: null,
 	bindEvents: function() {
-		$('.inputs input[type="button"]').on('click', this.startStream)
-		$('.tweet-stream').on('click', '.favorite-button', this.saveTweet)
-		$('.tweet-stream').on('click', '.remove-button', this.removeTweet)
+		$('.inputs input[type="button"]').on('click', this.startStream);
+		$('.tweet-stream').on('click', '.favorite-button', this.saveTweet);
+		$('.tweet-stream').on('click', '.remove-button', this.removeTweet);
 	},
 	startStream: function(e) {
 		$('.tweet-stream ul').children().remove();
@@ -26,7 +27,8 @@ var twitter_stream = {
 				},
 				dataType: "jsonp",
 				complete: function() {
-					setTimeout(function() {
+					if ( twitter_stream.next_retrieval_timeout) clearTimeout( twitter_stream.next_retrieval_timeout );
+					twitter_stream.next_retrieval_timeout = setTimeout(function() {
 						getTweets();
 						capTweets();
 					}, 5000);
@@ -42,7 +44,6 @@ var twitter_stream = {
 		getTweets();
 	},
 	saveTweet: function() {
-		console.log($(this).parent());
 		$(this).parent().appendTo($('.favorites'));
 	},
 	removeTweet: function() {
