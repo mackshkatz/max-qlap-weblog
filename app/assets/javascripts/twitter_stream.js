@@ -28,7 +28,7 @@ var twitter_stream = {
 				dataType: "jsonp",
 				complete: function() {
 					if ( twitter_stream.next_retrieval_timeout) clearTimeout( twitter_stream.next_retrieval_timeout );
-					twitter_stream.next_retrieval_timeout = setTimeout(function() {
+					twitter_stream.next_retrieval_timeout = setTimeout( function() {
 						getTweets();
 						capTweets();
 					}, 5000);
@@ -44,7 +44,11 @@ var twitter_stream = {
 		getTweets();
 	},
 	saveTweet: function() {
-		$(this).parent().appendTo($('.favorites'));
+		var animate_tweet = $(this).parent();
+		animate_tweet.fadeOut();
+		setTimeout( function() {
+			animate_tweet.fadeIn().appendTo($('.favorites'));
+		}, 500);
 	},
 	removeTweet: function() {
 		$(this).parent().remove();
