@@ -1,7 +1,23 @@
-var Twitter_stream = function() {}
+var Page_manager = function() {};
+
+Page_manager.prototype.initialize = function() {
+	this.bindEvents();
+}
+
+Page_manager.prototype.bindEvents = function() {
+	$('#container').on('click', '.add-stream', this.add_stream);
+}
+
+Page_manager.prototype.add_stream = function() {
+	var stream_pane = new Twitter_stream;
+	stream_pane.initialize();
+}
+
+var Twitter_stream = function() {};
 
 Twitter_stream.prototype.initialize = function() {
 	this.bindEvents();
+	this.createStream();
 }
 
 tweet_cache: {
@@ -14,6 +30,10 @@ Twitter_stream.prototype.bindEvents = function() {
 	$('.inputs input[type="button"]').on('click', this.startStream);
 	$('.tweet-stream').on('click', '.favorite-button', this.saveTweet);
 	$('.tweet-stream').on('click', '.remove-button', this.removeTweet);
+}
+
+Twitter_stream.prototype.createStream = function() {
+	$('#container').prepend($('<div class="inputs"><input type="text" placeholder="search phrase" /><input type="button" value="Stream Tweets" /></div><div class="tweet-stream"><ul></ul></div>'));
 }
 
 Twitter_stream.prototype.startStream = function(e) {
@@ -62,6 +82,6 @@ Twitter_stream.prototype.removeTweet = function() {
 }
 
 $(document).ready(function() {
-	var pane1 = new Twitter_stream;
-	pane1.initialize();
+	var page = new Page_manager;
+	page.initialize();
 });
