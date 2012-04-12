@@ -3,26 +3,28 @@
 
 	Page_manager.prototype.initialize = function() {
 		this.bindEvents();
+		this.streams = [];
 	}
 
 	Page_manager.prototype.bindEvents = function() {
+		_.bindAll(this);
 		$('#container').on('click', '.add-stream', this.add_stream);
 	}
 
-	var streams = [];
-
 	Page_manager.prototype.add_stream = function() {
-		var stream_pane = new Twitter_stream;
-		streams.push(stream_pane);
-		console.log(streams)
-		streams[streams.length - 1].initialize();
+		// var stream_pane = new Twitter_stream;
+		this.streams.push(new Twitter_stream().initialize());
+		// console.log(this.streams);
+		// this.streams[this.streams.length - 1].initialize();
 	}
 
 	var Twitter_stream = function() {};
 
 	Twitter_stream.prototype.initialize = function() {
 		this.bindEvents();
-		this.createStream();
+		$('#container').prepend($('<section><div class="inputs"><input type="text" placeholder="search phrase" /><input type="button" value="Stream Tweets" /></div><div class="tweet-stream"><ul></ul></div></section>'));
+		this.$container = $('.tweet-stream ul');
+		return this;
 	}
 
 	tweet_cache = {
@@ -32,16 +34,16 @@
 	next_retrieval_timeout = null;
 
 	Twitter_stream.prototype.bindEvents = function() {
-		$('#container').on('click', '.inputs input[type="button"]', this.startStream);
-		$('.tweet-stream').on('click', '.favorite-button', this.saveTweet);
-		$('.tweet-stream').on('click', '.remove-button', this.removeTweet);
-	}
-
-	Twitter_stream.prototype.createStream = function() {
-		$('#container').prepend($('<div class="inputs"><input type="text" placeholder="search phrase" /><input type="button" value="Stream Tweets" /></div><div class="tweet-stream"><ul></ul></div>'));
+		var new_binding = _.bind(this.startStream, this);
+		console.log(new_binding);
+		$('#container').on('click', '.inputs input[type="button"]', new_binding);
+		$('#container').on('click', '.favorite-button', this.saveTweet);
+		$('#container').on('click', '.remove-button', this.removeTweet);
 	}
 
 	Twitter_stream.prototype.startStream = function(e) {
+		console.log(this);
+		var self = this;
 		$('.tweet-stream ul').children().remove();
 		e.preventDefault();
 		user_search_input = $('input[type="text"]').val();
@@ -53,7 +55,7 @@
 				success: function(data) {
 					var new_tweet_text = data.results[0].text;
 					var new_tweet_user = data.results[0].from_user;
-					$('.tweet-stream ul').prepend('<li><span>' + new_tweet_user + ':</span>' + new_tweet_text + '<input type=button class="favorite-button" value="favorite?" /><input type=button class="remove-button" value="remove" /></li>');
+					self.$container.prepend('<li><span>' + new_tweet_user + ':</span>' + new_tweet_text + '<input type=button class="favorite-button" value="favorite?" /><input type=button class="remove-button" value="remove" /></li>');
 				},
 				dataType: "jsonp",
 				complete: function() {
@@ -87,7 +89,7 @@
 	}
 
 	$(document).ready(function() {
-		var page = new Page_manager;
+		window.page = new Page_manager;
 		page.initialize();
 	});
 })();
