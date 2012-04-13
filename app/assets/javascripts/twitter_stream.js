@@ -9,24 +9,17 @@
 		$('#container').on('click', '.add-stream', this.add_stream);
 	}
 	Page_manager.prototype.add_stream = function() {
-		// var stream_pane = new Twitter_stream;
 		this.streams.push(new Twitter_stream().initialize());
-		// console.log(this.streams);
-		// this.streams[this.streams.length - 1].initialize();
 	}
 
-	window.i = 0
 	var Twitter_stream = function() {};
 	Twitter_stream.prototype.initialize = function() {
 		var self = this;
-		this.i = window.i;
-		window.i++;
 
-		console.log('init new stream');
 		this.bindEvents();
 		
-		var inputs = $('<section><div class="inputs"><input type="text" placeholder="search phrase" /><input type="button" value="Stream Tweets" /></div><div class="tweet-stream"><ul></ul></div></section>');
-		$('#container').prepend(inputs);
+		var inputs = $('<section><div class="inputs"><input class="search-box" type="text" placeholder="search phrase" /><input type="button" value="Stream Tweets" /></div><div class="tweet-stream"><ul></ul></div></section>');
+		$('.main').prepend(inputs);
 		
 		inputs.find('input[type="button"]').bind('click', _.bind(this.startStream, this));
 		this.$container = inputs.find('.tweet-stream ul');
@@ -38,13 +31,10 @@
 	}
 	next_retrieval_timeout = null;
 	Twitter_stream.prototype.bindEvents = function() {
-		console.log('bind events');
-		// $('#container').on('click', '.inputs input[type="button"]', new_binding);
-		$('#container').on('click', '.favorite-button', this.saveTweet);
-		$('#container').on('click', '.remove-button', this.removeTweet);
+		$('.main').on('click', '.favorite-button', this.saveTweet);
+		$('.main').on('click', '.remove-button', this.removeTweet);
 	}
 	Twitter_stream.prototype.startStream = function(e) {
-		console.log('starting stream ', this.i);
 		e.preventDefault();
 		var self = this;
 
@@ -58,7 +48,6 @@
 				success: function(data) {
 					var new_tweet_text = data.results[0].text;
 					var new_tweet_user = data.results[0].from_user;
-					console.log(self.i, self.$container)
 					self.$container.prepend('<li><span>' + new_tweet_user + ':</span>' + new_tweet_text + '<input type=button class="favorite-button" value="favorite?" /><input type=button class="remove-button" value="remove" /></li>');
 				},
 				dataType: "jsonp",

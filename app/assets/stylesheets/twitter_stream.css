@@ -1,8 +1,18 @@
+body {
+	background: #c0deed;
+}
+
 #container {
 	width: 1000px;
 	margin: 0 auto;
 	position: relative;
 	padding-top: 50px;
+}
+
+.main {
+	float: left;
+	width: 753px;
+	margin-right: 22px;
 }
 
 .add-stream {
@@ -14,18 +24,25 @@
 section {
 	float: left;
 	width: 200px;
-	margin-right: 25px;
+	margin: 0 25px 25px 0;
+	border: 1px solid black;
+	padding: 12px;
 }
 
 .tweet-stream {
+	overflow: hidden;
+}
 
+.search-box {
+	width: 150px;
 }
 
 .favorites {
-	float: left;
-	width: 350px;
+	float: right;
+	width: 225px;
 }
 
 .favorites h2 {
 	margin: 0;
+	text-align: right;
 }
