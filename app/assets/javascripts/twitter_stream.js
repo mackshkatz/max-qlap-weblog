@@ -1,18 +1,42 @@
 (function() {
+
 	var Page_manager = function() {};
+	// var streams = [];
+
+	// var App = {
+
+	// 	init: function(){
+	// 		bindEvents();
+	// 	},
+
+	// 	bindEvents: function(){
+
+
+	// 	}
+
+
+	// }
+
+	// window.App = App;
+
+	App.init()
+	
 	Page_manager.prototype.initialize = function() {
 		this.bindEvents();
 		this.streams = [];
 	}
+	
 	Page_manager.prototype.bindEvents = function() {
 		_.bindAll(this);
 		$('#container').on('click', '.add-stream', this.add_stream);
 	}
+	
 	Page_manager.prototype.add_stream = function() {
 		this.streams.push(new Twitter_stream().initialize());
 	}
 
 	var Twitter_stream = function() {};
+	
 	Twitter_stream.prototype.initialize = function() {
 		var self = this;
 
@@ -26,14 +50,18 @@
 
 		return this;
 	}
+	
 	tweet_cache = {
 		//hdhssjf.[var] = true
 	}
+	
 	next_retrieval_timeout = null;
+	
 	Twitter_stream.prototype.bindEvents = function() {
 		$('.main').on('click', '.favorite-button', this.saveTweet);
 		$('.main').on('click', '.remove-button', this.removeTweet);
 	}
+	
 	Twitter_stream.prototype.startStream = function(e) {
 		e.preventDefault();
 		var self = this;
@@ -68,6 +96,7 @@
 		}
 		getTweets();
 	}
+	
 	Twitter_stream.prototype.saveTweet = function() {
 		var animate_tweet = $(this).parent();
 		animate_tweet.fadeOut();
@@ -75,6 +104,7 @@
 			animate_tweet.fadeIn().appendTo($('.favorites'));
 		}, 500);
 	}
+	
 	Twitter_stream.prototype.removeTweet = function() {
 		$(this).parent().remove();
 	}
@@ -83,4 +113,5 @@
 		window.page = new Page_manager;
 		page.initialize();
 	});
+
 })();
