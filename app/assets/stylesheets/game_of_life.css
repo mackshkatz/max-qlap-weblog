@@ -7,10 +7,13 @@
 	width: 100px;
 }
 
+.column {
+	float: left;
+}
+
 .cell {
 	width: 10px;
 	height: 10px;
-	float: left;
 	background: #DBDBDB;
 }
 
