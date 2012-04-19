@@ -1,0 +1,19 @@
+#container {
+	width: 1000px;
+	margin: 0 auto;
+}
+
+.grid {
+	width: 100px;
+}
+
+.cell {
+	width: 10px;
+	height: 10px;
+	float: left;
+	background: #DBDBDB;
+}
+
+.on {
+	background: #BFE01B;
+}

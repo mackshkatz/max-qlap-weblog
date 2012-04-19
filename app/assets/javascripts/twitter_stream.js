@@ -19,7 +19,7 @@
 
 	// window.App = App;
 
-	App.init()
+	// App.init()
 	
 	Page_manager.prototype.initialize = function() {
 		this.bindEvents();
