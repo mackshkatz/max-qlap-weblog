@@ -4,7 +4,7 @@
 }
 
 .grid {
-	width: 100px;
+	width: 1000px;
 }
 
 .column {
@@ -12,9 +12,11 @@
 }
 
 .cell {
+	-webkit-box-sizing: border-box;
 	width: 10px;
 	height: 10px;
 	background: #DBDBDB;
+	border: 1px solid #999;
 }
 
 .on {
