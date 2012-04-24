@@ -15,10 +15,10 @@
 	-webkit-box-sizing: border-box;
 	width: 10px;
 	height: 10px;
-	background: #DBDBDB;
+	background: #E6E3E4;
 	border: 1px solid #999;
 }
 
 .on {
-	background: #BFE01B;
+	background: #83FA39;
 }

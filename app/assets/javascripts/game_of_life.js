@@ -45,10 +45,8 @@
 		},
 
 		startLife: function() {
+			window.generation = 0;
 			setInterval(app.cycle, 100);
-			// app.cycle();
-			//loop through each cell in grid array, checking if it's on and the total score of the cells around it and determine
-			//if it should be on or off in next state, and push that into window.new_grid
 		},
 
 		cycle: function() {
@@ -57,39 +55,65 @@
 		},
 
 		generateNextGrid: function() {
+			y_value = parseInt(y_value);
 			for (var i = 0; i < grid.length; i++) {
 				var score = 0;
 				// cells to the left
-				if ((grid[i - y_value - 1]) && (!(grid[i].cell_number % y_value == 0)) && (grid[i - y_value - 1].DOMNode.hasClass('on'))) score++;
-				if ((grid[i - y_value]) && (grid[i - y_value].DOMNode.hasClass('on'))) score++;
-				if ((grid[i - y_value + 1]) && (!(grid[i].cell_number % (y_value - 1) == 0)) && (grid[i - y_value + 1].DOMNode.hasClass('on'))) score++;
+				if ((grid[i - y_value - 1]) && (!(grid[i].cell_number % y_value == 0)) && (grid[i - y_value - 1].DOMNode.hasClass('on'))) {
+					score++;
+				}
+
+				if ((grid[i - y_value]) && (grid[i - y_value].DOMNode.hasClass('on'))) {
+					score++;
+				}
+				if ((grid[i - y_value + 1]) && (!(grid[i].cell_number % (y_value - 1) == 0)) && (grid[i - y_value + 1].DOMNode.hasClass('on'))) {
+					score++;
+				}
 
 				// cells above and below
-				if ((!(grid[i].cell_number % y_value == 0)) && (grid[i - 1].DOMNode.hasClass('on'))) score++;
-				if ((!(grid[i].cell_number % (y_value - 1) == 0)) && (grid[i + 1].DOMNode.hasClass('on'))) score++;
+				if ((!(grid[i].cell_number % y_value == 0)) && (grid[i - 1].DOMNode.hasClass('on'))) {
+					score++;
+				}
+				if ((!(grid[i].cell_number % (y_value - 1) == 0)) && (grid[i + 1].DOMNode.hasClass('on'))) {
+					score++;
+				}
 
 				// cells to the right
-				if ((grid[i + y_value - 1]) && (!(grid[i].cell_number % y_value == 0)) && (grid[i + y_value - 1].DOMNode.hasClass('on'))) score++;
-				if ((grid[i + y_value]) && (grid[i + y_value].DOMNode.hasClass('on'))) score++;
-				if ((grid[i + y_value + 1]) && (!(grid[i].cell_number % (y_value - 1) == 0)) && (grid[i + y_value + 1].DOMNode.hasClass('on'))) score++;				
-				// console.log("cell", i, ":", score);
+				if ((grid[i + y_value - 1]) && (!(grid[i].cell_number % y_value == 0)) && (grid[i + y_value - 1].DOMNode.hasClass('on'))) {
+					score++;
+				}
+				if ((grid[i + y_value]) && (grid[i + y_value].DOMNode.hasClass('on'))) {
+					score++;
+				}
+				if ((grid[i + y_value + 1]) && (!(grid[i].cell_number % (y_value - 1) == 0)) && (grid[i + y_value + 1].DOMNode.hasClass('on'))) {
+					score++;
+				}				
 
-				if (grid[i].DOMNode.hasClass('on') && (score < 2)) {
+				if (grid[i].cell_number == 0) {
+					if (grid[i + 1].DOMNode.hasClass('on')) {
+						score++;
+					}
+					if (grid[i + y_value].DOMNode.hasClass('on')) {
+						score++;
+					}
+					if (grid[i + y_value + 1].DOMNode.hasClass('on')) {
+						score++;
+					}
+				}	
+
+				// Conway's rules
+				if (grid[i].DOMNode.hasClass('on') && (score < 2 || score > 3)) {
 					grid[i].nextRound = 0;
-				} else if (grid[i].DOMNode.hasClass('on') && (score == 2 || 3)) {
+				} else if (grid[i].DOMNode.hasClass('on') && (score == 2 || score == 3)) {
 					grid[i].nextRound = 1;
-				} else if (grid[i].DOMNode.hasClass('on') && (score > 3)) {
-					grid[i].nextRound = 0;
 				} else if (!(grid[i].DOMNode.hasClass('on')) && (score == 3)) {
 					grid[i].nextRound = 1;
 				} else if (!(grid[i].DOMNode.hasClass('on')) && (score !== 3)) {
 					grid[i].nextRound = 0;
 				}
-
-				// console.log(grid[i].nextRound);
 			}
 		},
-		generation: 0,
+
 		drawGrid: function() {
 			for (var i = 0; i < grid.length; i++) {
 				if ((grid[i].DOMNode.hasClass('on')) && (grid[i].nextRound == 0)) {
@@ -98,7 +122,7 @@
 					grid[i].DOMNode.addClass('on');
 				}
 			}
-			console.log("generation:", app.generation)
+			console.log("generation:", generation);
 		}
 	}
 	
