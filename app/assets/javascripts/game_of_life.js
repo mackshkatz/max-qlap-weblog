@@ -41,7 +41,7 @@
 		},
 
 		startLife: function() {
-			setInterval(app.cycle, 100);
+			setInterval(app.cycle, 300);
 		},
 
 		cycle: function() {
@@ -52,7 +52,6 @@
 		generateNextGrid: function() {
 			y_value = parseInt(y_value);
 			for (var i = 0; i < grid.length; i++) {
-				console.log("THIS TIME THROUGH:", i);
 				var score = 0;
 				// cells to the left
 				if ((grid[i - y_value - 1]) && (!(grid[i].cell_number % y_value == 0)) && (grid[i - y_value - 1].DOMNode.hasClass('on'))) {
