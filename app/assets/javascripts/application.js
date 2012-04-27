@@ -8,4 +8,3 @@
 //= require jquery_ujs
 //= require underscore
 //= require twitter_stream
-//= require game_of_life

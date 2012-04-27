@@ -1,0 +1,8 @@
+.cell {
+	width: 10px;
+	height: 10px;
+	float: left;
+	-webkit-box-sizing: border-box;
+	border: 1px solid #666;
+	background: #b4da55;
+}
