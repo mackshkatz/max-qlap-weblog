@@ -15,7 +15,19 @@
 		bindEvents: function() {
 			$('.inputs').on('click', '.generate-grid', this.generateGrid);
 			$('.inputs').on('click', '.start-life', this.startLife);
-			$('.grid').on('click', '.cell', this.toggleCell);
+			$('.grid').on('click', '.cell', function() {
+				app.toggleCell(this);
+			});
+			// in function called on mousedown, add another handler on mouseover, and then mouseup stops listening to mouseover
+			$('.grid').mousedown(function() {
+				// console.log('mousedown');
+				$('.grid').on('mouseenter', '.cell', function() {
+					app.toggleCell(this);
+				});
+			});
+			$(document).mouseup(function() {
+				$('.grid').off('mouseenter', '.cell');
+			});
 		},
 
 		generateGrid: function() {
@@ -35,8 +47,10 @@
 			$('.generate-grid').attr("disabled", "disabled");
 		},
 
-		toggleCell: function() {
-			$(this).toggleClass('on');
+		toggleCell: function(x) {
+			console.log('entered togglecell');
+			console.log(this);
+			$(x).toggleClass('on');
 		},
 
 		startLife: function() {
@@ -108,10 +122,11 @@
 				}
 			}
 		}
-	}
+	};
+
+	window.app = App;
 
 	$(document).ready(function() {
-		window.app = App;
 		app.initialize();
 	});
 })();;
