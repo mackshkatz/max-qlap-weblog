@@ -2,7 +2,8 @@
 	var Cell = function() {};
 
 	Cell.prototype.initialize = function(x, y) {
-		// console.log(x, y);
+		this.column = x;
+		this.row = y;
 		this.node = $('<div class="cell"></div>').appendTo('.grid');
 	};
 
@@ -27,14 +28,19 @@
 				// console.log(window.matrix[x]);
 				for (var y = 0; y < y_value; y++) {
 					// window.matrix[x].push(y);
-					console.log(matrix[x][y]);
+					matrix[x][y] = new Cell();
+					matrix[x][y].initialize(x, y);
 					// console.log("X:", x, "Y:", y);
 					// window.matrix[x][y] = new Cell();
 					// window.matrix[x][y].initialize(x, y)
 					// console.log(window.matrix[x][y]);
 				}
 			}
-		}
+		},
+
+		toggleCell: function() {
+			$(this).toggleClass('on');
+		},
 	}
 
 	$(document).ready(function() {
