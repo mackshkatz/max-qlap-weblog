@@ -1,7 +1,15 @@
+#container {
+	width: 1000px;
+	margin: 0 auto;
+}
+
+.column {
+	float: left;
+}
+
 .cell {
 	width: 10px;
 	height: 10px;
-	float: left;
 	-webkit-box-sizing: border-box;
 	border: 1px solid #666;
 	background: #E3E3E3;
