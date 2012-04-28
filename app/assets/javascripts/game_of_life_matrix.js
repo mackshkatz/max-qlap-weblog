@@ -1,3 +1,4 @@
+"use strict";
 (function() {
 	var Cell = function() {};
 
@@ -41,7 +42,7 @@
 					app.matrix[x][y].initialize(x, y, columnStructure);
 				}
 			}
-			$('<input type="button" value="Start Life" class="start-life" />').appendTo('.inputs');
+			$('.start-life').show();
 			$('.generate-grid').attr("disabled", "disabled");
 		},
 
@@ -94,13 +95,14 @@
 					}
 
 					// Conway's rules
-					if ((app.matrix[x][y].node.hasClass('on')) && (score < 2 || score > 3)) {
+					var is_on = app.matrix[x][y].node.hasClass('on');
+					if ((is_on) && (score < 2 || score > 3)) {
 						app.matrix[x][y].nextRound = 0;
-					} else if ((app.matrix[x][y].node.hasClass('on')) && (score == 2 || score == 3)) {
+					} else if ((is_on) && (score == 2 || score == 3)) {
 						app.matrix[x][y].nextRound = 1;
-					} else if (!(app.matrix[x][y].node.hasClass('on')) && (score == 3)) {
+					} else if (!(is_on) && (score == 3)) {
 						app.matrix[x][y].nextRound = 1;
-					} else if (!(app.matrix[x][y].node.hasClass('on')) && (score !== 3)) {
+					} else if (!(is_on) && (score !== 3)) {
 						app.matrix[x][y].nextRound = 0;
 					}
 				}
