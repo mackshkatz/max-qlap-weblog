@@ -18,9 +18,7 @@
 			$('.grid').on('click', '.cell', function() {
 				app.toggleCell(this);
 			});
-			// in function called on mousedown, add another handler on mouseover, and then mouseup stops listening to mouseover
 			$('.grid').mousedown(function() {
-				// console.log('mousedown');
 				$('.grid').on('mouseenter', '.cell', function() {
 					app.toggleCell(this);
 				});
@@ -31,26 +29,24 @@
 		},
 
 		generateGrid: function() {
-			window.matrix = [];
-			window.x_value = $('.x-value').val();
-			window.y_value = $('.y-value').val();
+			app.matrix = [];
+			app.x_value = $('.x-value').val();
+			app.y_value = $('.y-value').val();
 			var grid = $('.grid');
-			for (var x = 0; x < x_value; x++) {
+			for (var x = 0; x < app.x_value; x++) {
 				var columnStructure = $('<div class="column"></div>').appendTo(grid);
-				window.matrix[x] = [];
-				for (var y = 0; y < y_value; y++) {
-					matrix[x][y] = new Cell();
-					matrix[x][y].initialize(x, y, columnStructure);
+				app.matrix[x] = [];
+				for (var y = 0; y < app.y_value; y++) {
+					app.matrix[x][y] = new Cell();
+					app.matrix[x][y].initialize(x, y, columnStructure);
 				}
 			}
 			$('<input type="button" value="Start Life" class="start-life" />').appendTo('.inputs');
 			$('.generate-grid').attr("disabled", "disabled");
 		},
 
-		toggleCell: function(x) {
-			console.log('entered togglecell');
-			console.log(this);
-			$(x).toggleClass('on');
+		toggleCell: function(current_cell) {
+			$(current_cell).toggleClass('on');
 		},
 
 		startLife: function() {
@@ -63,61 +59,61 @@
 		},
 
 		generateNextGrid: function() {
-			for (var x = 0; x < x_value; x++) {
-				for (var y = 0; y < y_value; y++) {
+			for (var x = 0; x < app.x_value; x++) {
+				for (var y = 0; y < app.y_value; y++) {
 					var score = 0;
 
 					// cells to the left
-					if ((matrix[x-1]) && (matrix[x-1][y-1]) && (matrix[x-1][y-1].node.hasClass('on'))) {
+					if ((app.matrix[x-1]) && (app.matrix[x-1][y-1]) && (app.matrix[x-1][y-1].node.hasClass('on'))) {
 						score++;
 					}
-					if ((matrix[x-1]) && (matrix[x-1][y]) && (matrix[x-1][y].node.hasClass('on'))) {
+					if ((app.matrix[x-1]) && (app.matrix[x-1][y]) && (app.matrix[x-1][y].node.hasClass('on'))) {
 						score++;
 					}
-					if ((matrix[x-1]) && (matrix[x-1][y+1]) && (matrix[x-1][y+1].node.hasClass('on'))) {
+					if ((app.matrix[x-1]) && (app.matrix[x-1][y+1]) && (app.matrix[x-1][y+1].node.hasClass('on'))) {
 						score++;
 					}
 
 					// cells above and below
-					if ((matrix[x][y-1]) && (matrix[x][y-1].node.hasClass('on'))) {
+					if ((app.matrix[x][y-1]) && (app.matrix[x][y-1].node.hasClass('on'))) {
 						score++;
 					}
-					if ((matrix[x][y+1]) && (matrix[x][y+1].node.hasClass('on'))) {
+					if ((app.matrix[x][y+1]) && (app.matrix[x][y+1].node.hasClass('on'))) {
 						score++;
 					}
 
 					// cells to the right
-					if ((matrix[x+1]) && (matrix[x+1][y-1]) && (matrix[x+1][y-1].node.hasClass('on'))) {
+					if ((app.matrix[x+1]) && (app.matrix[x+1][y-1]) && (app.matrix[x+1][y-1].node.hasClass('on'))) {
 						score++;
 					}
-					if ((matrix[x+1]) && (matrix[x+1][y]) && (matrix[x+1][y].node.hasClass('on'))) {
+					if ((app.matrix[x+1]) && (app.matrix[x+1][y]) && (app.matrix[x+1][y].node.hasClass('on'))) {
 						score++;
 					}
-					if ((matrix[x+1]) && (matrix[x+1][y+1]) && (matrix[x+1][y+1].node.hasClass('on'))) {
+					if ((app.matrix[x+1]) && (app.matrix[x+1][y+1]) && (app.matrix[x+1][y+1].node.hasClass('on'))) {
 						score++;
 					}
 
 					// Conway's rules
-					if ((matrix[x][y].node.hasClass('on')) && (score < 2 || score > 3)) {
-						matrix[x][y].nextRound = 0;
-					} else if ((matrix[x][y].node.hasClass('on')) && (score == 2 || score == 3)) {
-						matrix[x][y].nextRound = 1;
-					} else if (!(matrix[x][y].node.hasClass('on')) && (score == 3)) {
-						matrix[x][y].nextRound = 1;
-					} else if (!(matrix[x][y].node.hasClass('on')) && (score !== 3)) {
-						matrix[x][y].nextRound = 0;
+					if ((app.matrix[x][y].node.hasClass('on')) && (score < 2 || score > 3)) {
+						app.matrix[x][y].nextRound = 0;
+					} else if ((app.matrix[x][y].node.hasClass('on')) && (score == 2 || score == 3)) {
+						app.matrix[x][y].nextRound = 1;
+					} else if (!(app.matrix[x][y].node.hasClass('on')) && (score == 3)) {
+						app.matrix[x][y].nextRound = 1;
+					} else if (!(app.matrix[x][y].node.hasClass('on')) && (score !== 3)) {
+						app.matrix[x][y].nextRound = 0;
 					}
 				}
 			}
 		},
 
 		drawGrid: function() {
-			for (var x = 0; x < x_value; x++) {
-				for (var y = 0; y < y_value; y++) {
-					if ((matrix[x][y].node.hasClass('on')) && (matrix[x][y].nextRound == 0)) {
-						matrix[x][y].node.removeClass('on');
-					} else if (!(matrix[x][y].node.hasClass('on')) && (matrix[x][y].nextRound == 1)) {
-						matrix[x][y].node.addClass('on');
+			for (var x = 0; x < app.x_value; x++) {
+				for (var y = 0; y < app.y_value; y++) {
+					if ((app.matrix[x][y].node.hasClass('on')) && (app.matrix[x][y].nextRound == 0)) {
+						app.matrix[x][y].node.removeClass('on');
+					} else if (!(app.matrix[x][y].node.hasClass('on')) && (app.matrix[x][y].nextRound == 1)) {
+						app.matrix[x][y].node.addClass('on');
 					}
 				}
 			}
