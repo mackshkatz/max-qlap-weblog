@@ -66,7 +66,7 @@
 		e.preventDefault();
 		var self = this;
 
-		$('.tweet-stream ul').children().remove();
+		// $('.tweet-stream ul').children().remove();
 		this.user_search_input = $('input[type="text"]').val();
 		var twitter_search = "http://search.twitter.com/search.json?q=" + encodeURIComponent(this.user_search_input);
 

@@ -1,5 +1,29 @@
-(function($) {
+window.twitter_stream = {
 
-	Tweet = Backbone.Model.extend({});
+	init: function() {
 
-})(jQuery);
+	},
+
+	models: {
+		Tweet: Backbone.Model.extend({})
+	},
+
+	collections: {
+		Stream: Backbone.Collection.extend({})
+	},
+
+	views: {
+		StreamView: Backbone.View.extend({
+			
+		}),
+
+		TweetView: Backbone.View.extend({
+
+		})
+	},
+
+};
+
+$(document).ready(function() {
+	twitter_stream.init();
+}); 
