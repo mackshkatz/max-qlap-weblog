@@ -22,6 +22,8 @@ window.twitter_stream = {
 				var stream = new twitter_stream.collections.Stream({
 					subject: subject
 				});
+				stream.view.retrieveTweets();
+				console.log('hit router method')
 
 			}
 		})
@@ -33,15 +35,15 @@ window.twitter_stream = {
 
 	collections: {
 		Stream: Backbone.Collection.extend({
-			initialize: function(attributes) {
+			initialize: function(options) {
 				// this.model = twitter_stream.models.Tweet;
 				this.view = new twitter_stream.views.StreamView({
 					collection: this,
-					attributes: attributes
+					options: options
 				});
 				this.view.render();
-				console.log("Attributes", attributes);
-				this.attributes = attributes;
+				console.log("Options", options);
+				this.options = options;
 			},
 
 			parse: function(response) {
@@ -50,8 +52,12 @@ window.twitter_stream = {
 			},
 
 			createUrlFromQuery: function(query) {
-				if (this.attributes && this.attributes.subject) {
-					this.url = "http://search.twitter.com/search.json?callback=?&q=" + this.attributes.subject;
+				console.log("inside createurl", this.options);
+				if (this.options && this.options.subject) {
+					console.log("SUBJECT EXISTS")
+				}
+				if (this.options && this.options.subject) {
+					this.url = "http://search.twitter.com/search.json?callback=?&q=" + this.options.subject;
 				} else {
 					this.url = "http://search.twitter.com/search.json?callback=?&q=" + query;
 				}
@@ -63,6 +69,7 @@ window.twitter_stream = {
 					var tweetView = new twitter_stream.views.TweetView({
 						model: tweet
 					})
+					console.log(tweet);
 					tweetView.render();
 				})
 			}
@@ -75,22 +82,24 @@ window.twitter_stream = {
 			className: 'stream',
 
 			events: {
-				'keyup .stream-search': 'retrieveTweets'
+				'keyup .stream-search': 'checkKey'
 			},
 
 			render: function() {
 				var source = $("#stream-template").html();
 				var markup = Handlebars.compile(source);
-				this.$el.appendTo('.streams-wrapper');
+				this.$el.prependTo('.streams-wrapper');
 				this.$el.html(markup);
 			},
 
-			retrieveTweets: function(e) {
-				var self = this;
-				console.log(e);
-				if (!(e.keyCode == 13)) {
-					return false;
+			checkKey: function(e) {
+				if (e.keyCode == 13) {
+					this.retrieveTweets();
 				}
+			},
+
+			retrieveTweets: function() {
+				var self = this;
 				console.log(this.$el);
 				var query = this.$el.find('.stream-search').val();
 				console.log("this.collection", this.collection);
@@ -112,7 +121,7 @@ window.twitter_stream = {
 				var tweet_text = this.model.get('text');
 				var tweet_user_name = this.model.get('from_user_name');
 				var $collection_ul = this.model.collection.view.$el.find('ul');
-				this.$el.text(tweet_text);
+				this.$el.html("<strong>" + tweet_user_name + ":</strong>" + tweet_text);
 				this.$el.appendTo($collection_ul);
 			}
 		})
