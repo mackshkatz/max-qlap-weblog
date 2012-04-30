@@ -2,11 +2,28 @@ window.twitter_stream = {
 
 	init: function() {
 		this.bindEvents();
+		var streamRouter = new twitter_stream.routers.StreamRouter();
+		Backbone.history.start();
 	},
 
 	bindEvents: function() {
 		$('.add-stream').click(function() {
 			var stream = new twitter_stream.collections.Stream();
+		})
+	},
+
+	routers: {
+		StreamRouter: Backbone.Router.extend({
+			routes: {
+				':subject': 'automaticStream'
+			},
+
+			automaticStream: function(subject) {
+				var stream = new twitter_stream.collections.Stream({
+					subject: subject
+				});
+
+			}
 		})
 	},
 
@@ -16,11 +33,15 @@ window.twitter_stream = {
 
 	collections: {
 		Stream: Backbone.Collection.extend({
-			initialize: function() {
+			initialize: function(attributes) {
+				// this.model = twitter_stream.models.Tweet;
 				this.view = new twitter_stream.views.StreamView({
-					collection: this
+					collection: this,
+					attributes: attributes
 				});
 				this.view.render();
+				console.log("Attributes", attributes);
+				this.attributes = attributes;
 			},
 
 			parse: function(response) {
@@ -29,7 +50,11 @@ window.twitter_stream = {
 			},
 
 			createUrlFromQuery: function(query) {
-				this.url = "http://search.twitter.com/search.json?callback=?&q=" + query
+				if (this.attributes && this.attributes.subject) {
+					this.url = "http://search.twitter.com/search.json?callback=?&q=" + this.attributes.subject;
+				} else {
+					this.url = "http://search.twitter.com/search.json?callback=?&q=" + query;
+				}
 			},
 
 			renderTweets: function() {
