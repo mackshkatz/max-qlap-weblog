@@ -23,7 +23,6 @@ window.twitter_stream = {
 					subject: subject
 				});
 				stream.view.retrieveTweets();
-				console.log('hit router method')
 
 			}
 		})
@@ -42,20 +41,14 @@ window.twitter_stream = {
 					options: options
 				});
 				this.view.render();
-				console.log("Options", options);
 				this.options = options;
 			},
 
 			parse: function(response) {
-				console.log(response.results);
 				return response.results;
 			},
 
 			createUrlFromQuery: function(query) {
-				console.log("inside createurl", this.options);
-				if (this.options && this.options.subject) {
-					console.log("SUBJECT EXISTS")
-				}
 				if (this.options && this.options.subject) {
 					this.url = "http://search.twitter.com/search.json?callback=?&q=" + this.options.subject;
 				} else {
@@ -68,8 +61,7 @@ window.twitter_stream = {
 					// render tweet model
 					var tweetView = new twitter_stream.views.TweetView({
 						model: tweet
-					})
-					console.log(tweet);
+					});
 					tweetView.render();
 				})
 			}
@@ -100,9 +92,7 @@ window.twitter_stream = {
 
 			retrieveTweets: function() {
 				var self = this;
-				console.log(this.$el);
 				var query = this.$el.find('.stream-search').val();
-				console.log("this.collection", this.collection);
 				this.collection.createUrlFromQuery(query);
 				// fetch completes and then calls parse so I can format the data the way
 				// I want. I just want the array of tweets so I can iterate over them
@@ -117,7 +107,6 @@ window.twitter_stream = {
 			tagName: 'li',
 
 			render: function() {
-				console.log(this);
 				var tweet_text = this.model.get('text');
 				var tweet_user_name = this.model.get('from_user_name');
 				var $collection_ul = this.model.collection.view.$el.find('ul');
