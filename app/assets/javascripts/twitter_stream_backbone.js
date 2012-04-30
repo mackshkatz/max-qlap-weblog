@@ -24,7 +24,8 @@ window.twitter_stream = {
 			},
 
 			parse: function(response) {
-				console.log(response);
+				console.log(response.results);
+				return response.results;
 			},
 
 			createUrlFromQuery: function(query) {
@@ -69,6 +70,9 @@ window.twitter_stream = {
 				var query = this.$el.find('.stream-search').val();
 				console.log("this.collection", this.collection);
 				this.collection.createUrlFromQuery(query);
+				// fetch completes and then calls parse so I can format the data the way
+				// I want. I just want the array of tweets so I can iterate over them
+				// in renderTweets and pass in each model to an instance of TweetView
 				this.collection.fetch().success(function() {
 					self.collection.renderTweets();
 				});
@@ -79,7 +83,12 @@ window.twitter_stream = {
 			tagName: 'li',
 
 			render: function() {
-
+				console.log(this);
+				var tweet_text = this.model.get('text');
+				var tweet_user_name = this.model.get('from_user_name');
+				var $collection_ul = this.model.collection.view.$el.find('ul');
+				this.$el.text(tweet_text);
+				this.$el.appendTo($collection_ul);
 			}
 		})
 	}
